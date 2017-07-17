@@ -3,6 +3,10 @@ var router = express.Router();
 var usersController = require('../controllers/users');
 var staticsController = require('../controllers/statics');
 
+var yelp = require('yelp-fusion');
+var dotenv = require('dotenv').load()
+var client = yelp.client(process.env.YELP_API_KEY)
+
 function authenticateUser(req, res, next) {
   // If the user is authenticated, then we continue the execution
   if (req.isAuthenticated()) return next();
@@ -27,5 +31,35 @@ router.route("/logout")
 
 router.route("/secret")
   .get(authenticateUser, usersController.secret)
+
+// Search on initial click of submit
+router.route("/search/:searchTerm/:locationTerm")
+.get((req, res) => {
+  console.log('searching');
+  client.search({
+    term: req.params.searchTerm,
+    location: req.params.locationTerm
+  }).then(response => {
+    res.send(response.jsonBody)
+  }).catch(e => {
+    console.log(e);
+  });
+})
+
+// Page 1, 2, 3... of results
+router.route("/search/:searchTerm/:page/:locationTerm")
+.get((req, res) => {
+  console.log('here');
+  console.log(req.params.offset);
+  client.search({
+    term: req.params.searchTerm,
+    offset: 20 * (req.params.page -1),
+    location: req.params.locationTerm
+  }).then(response => {
+    res.send(response.jsonBody)
+  }).catch(e => {
+    console.log(e);
+  });
+})
 
 module.exports = router
