@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bannd</title>
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Bannd</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="user-menu">
+          <ul>
+            <% if (user) { %>
+              <li>Hello <%= user.local.email %></li>
+              <li><a href="/logout">Logout</a></li>
+              <li><a href="/secret">Secret Page (Authenticated Users Only)</a></li>
+            <% } else { %>
+              <li><a href="/login">Login</a></li>
+              <li><a href="/signup">Signup</a></li>
+            <% } %>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <main class="container">
+      <%- body %>
+    </main>
+
+  </body>
+</html>
