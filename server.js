@@ -8,6 +8,9 @@ var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
+var yelp         = require('yelp-fusion');
+var dotenv       = require('dotenv').load()
+var client       = yelp.client(process.env.YELP_API_KEY)
 
 const Business = require('./models/Business.js');
 
@@ -36,5 +39,6 @@ app.use(function (req, res, next){
 
 var routes = require('./config/routes');
 app.use(routes);
+
 
 app.listen(3000);
