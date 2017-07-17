@@ -10,7 +10,7 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
 const Business = require('./models/Business.js');
-const User = require('./model/User.js')
+const User = require('./models/user.js')
 
 mongoose.connect('mongodb://localhost/Bannd');
 
