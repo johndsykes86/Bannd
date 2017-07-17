@@ -44,6 +44,7 @@ searchSubmit.on('click', () => {
         console.log(d);
         display.empty()
         d.businesses.forEach((result) => {
+          console.log(result);
           var aName = $('<a id="business-link">')
           aName.attr('href', `/show/${result.id}`)
           aName.html(result.name)
