@@ -9,6 +9,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
+const Business = require('./models/Business.js');
+
 mongoose.connect('mongodb://localhost/Bannd');
 
 app.use(morgan('dev'));
