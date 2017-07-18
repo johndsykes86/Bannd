@@ -62,4 +62,24 @@ router.route("/search/:searchTerm/:page/:locationTerm")
     });
   })
 
+// show each business
+
+router.route("/show/:id/")
+.get((req, res) => {
+  console.log(req.params.id)
+  res.send("Iamhere")
+}
+)
+
+
+router.route('/show/:businessId')
+.get((req, res) => {
+  client.business(req.params.businessId).then(response => {
+      console.log(response.jsonBody.name);
+      res.render('show', {data: response.jsonBody})
+    }).catch(e => {
+      console.log(e);
+    });
+})
+
 module.exports = router
