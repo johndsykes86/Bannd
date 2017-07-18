@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var usersController = require('../controllers/users');
 var staticsController = require('../controllers/statics');
-var businessController = require('../controllers/business.js');
+var businessController = require('../controllers/businesses');
 
 var yelp = require('yelp-fusion');
 var dotenv = require('dotenv').load()
