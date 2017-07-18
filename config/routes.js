@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var usersController = require('../controllers/users');
 var staticsController = require('../controllers/statics');
+var businessController = require('../controllers/business.js');
 
 var yelp = require('yelp-fusion');
 var dotenv = require('dotenv').load()
@@ -64,12 +65,7 @@ router.route("/search/:searchTerm/:page/:locationTerm")
 
 // show each business
 
-router.route("/show/:id/")
-.get((req, res) => {
-  console.log(req.params.id)
-  res.send("Iamhere")
-}
-)
+
 
 
 router.route('/show/:businessId')
@@ -81,5 +77,10 @@ router.route('/show/:businessId')
       console.log(e);
     });
 })
+
+router.route('/show/:businessId').post(businessController.createBusiness)
+
+
+
 
 module.exports = router
