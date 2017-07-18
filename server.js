@@ -8,10 +8,13 @@ var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
+var dbURL = 'mongodb://localhost/Bannd'
 
-const Business = require('./models/Business.js');
 
-mongoose.connect('mongodb://localhost/Bannd');
+
+mongoose.connect(dbURL, (err) => {
+  console.log(err||`MongoDB @ ${dbURL}is connected`)
+});
 
 app.use(morgan('dev'));
 app.use(cookieParser());
