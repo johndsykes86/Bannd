@@ -25,7 +25,7 @@
         <div class="collapse navbar-collapse" id="user-menu">
           <ul>
             <% if (user) { %>
-              <li>Hello <%= user.local.email %></li>
+              <li>Hello <a href="<%= `/profile/${user.id}` %>"><%= user.local.email %></a></li>
               <li><a href="/logout">Logout</a></li>
               <li><a href="/secret">Secret Page (Authenticated Users Only)</a></li>
               <h1>WORKS</h1>

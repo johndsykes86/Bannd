@@ -6,6 +6,7 @@ var staticsController = require('../controllers/statics');
 var yelp = require('yelp-fusion');
 var dotenv = require('dotenv').load()
 var client = yelp.client(process.env.YELP_API_KEY)
+var User = require('../models/user')
 
 function authenticateUser(req, res, next) {
   // If the user is authenticated, then we continue the execution
@@ -63,15 +64,6 @@ router.route("/search/:searchTerm/:page/:locationTerm")
   })
 
 // show each business
-
-router.route("/show/:id/")
-.get((req, res) => {
-  console.log(req.params.id)
-  res.send("Iamhere")
-}
-)
-
-
 router.route('/show/:businessId')
 .get((req, res) => {
   client.business(req.params.businessId).then(response => {
@@ -80,6 +72,14 @@ router.route('/show/:businessId')
     }).catch(e => {
       console.log(e);
     });
+})
+
+router.route('/profile/:userId')
+.get((req, res) => {
+  User.findById(req.params.userId, (err, user) => {
+    // console.log(user.local)
+    res.render('user', {userData: user})
+  })
 })
 
 module.exports = router
