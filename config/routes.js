@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var usersController = require('../controllers/users');
 var staticsController = require('../controllers/statics');
+var businessController = require('../controllers/business.js');
 
 var yelp = require('yelp-fusion');
 var dotenv = require('dotenv').load()
@@ -64,6 +65,7 @@ router.route("/search/:searchTerm/:page/:locationTerm")
   })
 
 // show each business
+
 router.route('/show/:businessId')
 .get((req, res) => {
   client.business(req.params.businessId).then(response => {
@@ -74,6 +76,7 @@ router.route('/show/:businessId')
     });
 })
 
+
 router.route('/profile/:userId')
 .get((req, res) => {
   User.findById(req.params.userId, (err, user) => {
@@ -81,5 +84,12 @@ router.route('/profile/:userId')
     res.render('user', {userData: user})
   })
 })
+
+router.route('/show/:businessId').post(businessController.createBusiness)
+
+
+
+
+
 
 module.exports = router

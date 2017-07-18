@@ -9,15 +9,19 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var MongoDBStore = require('connect-mongodb-session')(session);
+var dbURL = 'mongodb://localhost/Bannd'
 
-const Business = require('./models/Business.js');
-const User = require('./models/user.js')
 
-mongoose.connect('mongodb://localhost/Bannd');
 const store = new MongoDBStore({
   uri: 'mongodb://localhost/Bannd',
   collection: 'sessions'
 })
+
+
+mongoose.connect(dbURL, (err) => {
+  console.log(err||`MongoDB @ ${dbURL}is connected`)
+});
+
 
 app.use(morgan('dev'));
 app.use(cookieParser());
