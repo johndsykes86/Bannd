@@ -74,8 +74,12 @@ router.route("/show/:id/")
 
 router.route('/show/:businessId')
 .get((req, res) => {
- res.render('show')
- console.log(req.params.businessId)
-}
-)
+  client.business(req.params.businessId).then(response => {
+      console.log(response.jsonBody.name);
+      res.render('show', {data: response.jsonBody})
+    }).catch(e => {
+      console.log(e);
+    });
+})
+
 module.exports = router
