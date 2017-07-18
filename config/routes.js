@@ -33,6 +33,8 @@ router.route("/logout")
 router.route("/secret")
   .get(authenticateUser, usersController.secret)
 
+<<<<<<< HEAD
+=======
 // Search on initial click of submit
 router.route("/search/:searchTerm/:locationTerm")
   .get((req, res) => {
@@ -80,6 +82,7 @@ router.route('/show/:businessId')
 
 router.route('/show/:businessId').post(businessController.createBusiness)
 
+>>>>>>> ccd1f14e4cc273be24c9b9c6fa2aca288f89d59f
 
 
 
