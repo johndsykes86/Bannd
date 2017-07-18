@@ -5,9 +5,8 @@ var User = mongoose.Schema({
   local : {
     email        : String,
     password     : String,
-    firstName    : String,
-    lastName     : String,
-  }
+  },
+  comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'comment'}]
 });
 
 User.methods.encrypt = function(password){

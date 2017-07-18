@@ -7,6 +7,7 @@ var businessController = require('../controllers/business.js');
 var yelp = require('yelp-fusion');
 var dotenv = require('dotenv').load()
 var client = yelp.client(process.env.YELP_API_KEY)
+var User = require('../models/user')
 
 function authenticateUser(req, res, next) {
   // If the user is authenticated, then we continue the execution
@@ -65,9 +66,6 @@ router.route("/search/:searchTerm/:page/:locationTerm")
 
 // show each business
 
-
-
-
 router.route('/show/:businessId')
 .get((req, res) => {
   client.business(req.params.businessId).then(response => {
@@ -78,7 +76,17 @@ router.route('/show/:businessId')
     });
 })
 
+
+router.route('/profile/:userId')
+.get((req, res) => {
+  User.findById(req.params.userId, (err, user) => {
+    // console.log(user.local)
+    res.render('user', {userData: user})
+  })
+})
+
 router.route('/show/:businessId').post(businessController.createBusiness)
+
 
 
 
