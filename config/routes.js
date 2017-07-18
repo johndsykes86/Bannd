@@ -62,4 +62,20 @@ router.route("/search/:searchTerm/:page/:locationTerm")
   });
 })
 
+// show each business
+
+router.route("/show/:id/")
+.get((req, res) => {
+  console.log(req.params.id)
+  res.send("Iamhere")
+}
+)
+
+
+router.route('/show/:businessId')
+.get((req, res) => {
+ res.render('show')
+ console.log(req.params.businessId)
+}
+)
 module.exports = router
