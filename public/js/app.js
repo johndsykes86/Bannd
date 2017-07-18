@@ -89,16 +89,3 @@ searchSubmit.on('click', () => {
 
   $.ajax(rs).done(cb)
 })
-
-
-
-// businessShow.on('click', () => {
-//   var rs = {
-//     method: 'get',
-//     url: '/show/:id/' + id.val() + '/' +
-//     $(this).text() + '/' location.val()
-//
-//     function cb(d){}
-//     display.empty()
-//
-// })
