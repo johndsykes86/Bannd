@@ -28,4 +28,7 @@ router.route("/logout")
 router.route("/secret")
   .get(authenticateUser, usersController.secret)
 
+
+
+
 module.exports = router
