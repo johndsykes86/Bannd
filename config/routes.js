@@ -69,46 +69,30 @@ router.route("/search/:searchTerm/:page/:locationTerm")
   })
 
 // show each business
-
 router.route('/show/:businessId')
 .get((req, res) => {
-  client.business(req.params.businessId).then(response => {
-      console.log(response.jsonBody.id);
-      res.render('show', {data: response.jsonBody})
-    }).catch(e => {
-      console.log(e);
-    });
-})
-
-router.route('/show/:businessId').post((req, res) =>{
-  console.log('req.params.businessId', req.params.businessId)
-  Business.findOne({yelpID: req.params.businessId}, (err, business)=>{
-    console.log("Business found")
-    console.log(business)
-    if (business){
-      //create a comment on the business
-      res.json({message: "create a comment on the business"})
-    } else {
-      //create the business
-      client.business(req.params.businessId).then(response => {
-      // client.business('the-blind-donkey-long-beach-4').then(response => {
-          console.log(response)
-
-
-          Business.create({
-            yelpID: response.jsonBody.id,
-            name: response.jsonBody.name,
-            address: response.jsonBody.name,
-            img_url: response.jsonBody.image_url
-          }, function (err, business){
-            res.json({ business})
-          })
+  Business.findOne({yelpID: req.params.businessId}, (err, booBusiness) => {
+    if (booBusiness) {
+      Business.findOne({yelpID: req.params.businessId}, (err, business) => {
+        console.log(business);
+        if(err) console.log(err);
+        res.render('show', {data: business})
       })
+
+    } else {
+      client.business(req.params.businessId).then(response => {
+          console.log(response.jsonBody.id);
+          res.render('show', {data: response.jsonBody})
+        }).catch(e => {
+          console.log(e);
+        });
     }
   })
 
 })
 
+
+// User profile view
 router.route('/profile/:userId')
 .get((req, res) => {
   User.findById(req.params.userId, (err, user) => {
@@ -118,22 +102,70 @@ router.route('/profile/:userId')
 })
 
 
-// router.route('/show/:businessId').post(businessController.createBusiness)
-
-router.route('/show/:businessId')
+// Creates comment and business or just create comment
+router.route('/show/:businessId/comment')
   .post((req, res) => {
     //comment is album
     //artist is buissness
+    Business.findOne({yelpID: req.params.businessId}, (err, business) => {
+      // if business is true then create comment normal, if not create business with post above then create comment
+      if(err) return console.log(err)
+      if (!business){
+        //create the business
+        client.business(req.params.businessId).then(response => {
+          Business.create({
+            yelpID: response.jsonBody.id,
+            name: response.jsonBody.name,
+            address: response.jsonBody.location.display_address,
+            img_url: response.jsonBody.image_url
+          }, function (err, business){
+            var newComment = new Comments(req.body)
+            newComment._business = business._id
+            newComment._by = user._id
 
-    Comments.create(req.body, (err, commentCreated) => {
-      res.redirect('/show/' + req.params.businessId)
+            newComment.save((err) => {
+              if(err) return console.log(err)
 
-      // res.send(commentCreated)
+              business.comments.push(newComment)
+              business.save((err, comment)=>{
+                if(err) return console.log(err)
+                console.log(comment);
+                res.redirect('/show/' + req.params.businessId)
+              })
+            })
+          })
+        })
+
+      } else {
+        //create a comment on the business
+        var newComment = new Comments(req.body)
+        newComment._business = business._id
+        newComment._by = user._id
+
+        newComment.save((err) => {
+          if(err) return console.log(err)
+
+          business.comments.push(newComment)
+          business.save((err, comment)=>{
+            if(err) return console.log(err)
+            console.log(comment);
+            res.redirect('/show/' + req.params.businessId)
+          })
+        })
+      }
     })
   })
 
+router.route('/show/:businessId/comment/:commentId').get((req, res) => {
+  console.log('Working HITS');
+})
 
-router.route('show/:id').post(businessController.createBusiness)
+router.route('/show/:businessId/comment/:commentId').patch((req, res) => {
+  console.log('Working HITS');
+})
+
+
+// router.route('show/:id').post(businessController.createBusiness)
 
 
 

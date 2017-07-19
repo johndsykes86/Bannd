@@ -23,6 +23,7 @@ searchSubmit.on('click', () => {
   function cb(d) {
     // console.log(d + '#################');
     display.empty()
+    pageList.empty()
     var pageNum = 50
     if(Math.floor(d.total / 20) > pageNum) {
       pageNum = 50
@@ -89,4 +90,23 @@ searchSubmit.on('click', () => {
   }
 
   $.ajax(rs).done(cb)
+})
+
+$('.edit-comment').on('click', function(){
+  var id = $(this).attr('id')
+  var titleText = $(`#title-${id}`).text()
+  var bodyText = $(`#body-${id}`).text()
+  var form = $('.form')
+  var title = $('.title')
+  var body = $('.body')
+  var submit = $('.submit')
+  var postUrl = form.attr('action')
+
+
+  form.attr('method', 'patch')
+  title.attr('value', titleText)
+  body.text(bodyText)
+  submit.attr('value', 'Edit Story')
+  form.attr('action', `${postUrl}/${$('.each-comment').attr('id')}`)
+
 })

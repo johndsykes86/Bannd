@@ -1,16 +1,25 @@
 <h1>SHOW EACH Business</h1>
-<%= data.name %>
-<br>
-<%= data.location.display_address %>
-<br>
-<%= data.phone %>
-</br>
-<%// if (commentData) {%>
-  <%//= commentData.title %>
-  <%//= commentData.body %>
-<%// } %>
-<form action="<%= `/show/${data.id}` %>" method="post">
-  <input type="text" name="title" value="">
-  <textarea name="body" rows="8" cols="80" placeholder="Write your story...."></textarea>
-  <input type="submit" id="story-create" value="Post Story" >
+<% var routeId = data.id %>
+<% if (data.comments) {%>
+  <% routeId = data.yelpID %>
+  <h2><%= data.name %></h2>
+  <h3><%= data.address %></h3></br>
+  <% for (var i = 0; i < data.comments.length; i++) { %>
+    <div class="each-comment" id="<%= `${data.comments[i].id}` %>">
+      Title: <p id="title-<%= `${i}` %>"><%= data.comments[i].title %></p>
+      <p id="body-<%= `${i}` %>"><%= data.comments[i].body %></p>
+      <a id="<%=`${i}`%>" class="edit-comment" >Edit</a>
+    </div>
+
+  <% } %>
+
+<% } else { %>
+  <h2><%= data.name %></h2>
+  <h3><%= data.location.display_address %></h3>
+<% } %>
+
+<form class="form" action="<%= `/show/${routeId}/comment` %>" method="post">
+  <input class="title" type="text" name="title" value="">
+  <textarea class="body" name="body" rows="8" cols="80" placeholder="Write your story...." ></textarea>
+  <input class="submit" type="submit" id="story-create" value="Post Story" >
 </form>
