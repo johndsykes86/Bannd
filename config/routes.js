@@ -7,10 +7,10 @@ var businessController = require('../controllers/businesses');
 var yelp = require('yelp-fusion');
 var dotenv = require('dotenv').load()
 var client = yelp.client(process.env.YELP_API_KEY)
+
+
 var User = require('../models/user')
-
 var Comments = require('../models/comment')
-
 var Business = require('../models/business')
 
 
@@ -165,7 +165,13 @@ router.route('/show/:businessId/comment/:commentId').patch((req, res) => {
 })
 
 
-// router.route('show/:id').post(businessController.createBusiness)
+router.route('/show/:businessId/comment/:commentId').delete((req, res) =>{
+  Comments.findByIdAndRemove(req.params.commentId, (err,comment)=> {
+    if(err) return console.log(err)
+    res.method = 'GET'
+    res.redirect('/show/'+req.params.businessId)
+  })
+})
 
 
 
