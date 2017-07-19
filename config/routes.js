@@ -8,6 +8,7 @@ var yelp = require('yelp-fusion');
 var dotenv = require('dotenv').load()
 var client = yelp.client(process.env.YELP_API_KEY)
 var User = require('../models/user')
+var Business = require('../models/business')
 
 function authenticateUser(req, res, next) {
   // If the user is authenticated, then we continue the execution
@@ -76,6 +77,34 @@ router.route('/show/:businessId')
     });
 })
 
+router.route('/show/:businessId').post((req, res) =>{
+  console.log('req.params.businessId', req.params.businessId)
+  Business.findOne({yelpID: req.params.businessId}, (err, business)=>{
+    console.log("Business found")
+    console.log(business)
+    if (business){
+      //create a comment on the business
+      res.json({message: "create a comment on the business"})
+    } else {
+      //create the business
+      client.business(req.params.businessId).then(response => {
+      // client.business('the-blind-donkey-long-beach-4').then(response => {
+          console.log(response)
+
+
+          Business.create({
+            yelpID: response.jsonBody.id,
+            name: response.jsonBody.name,
+            address: response.jsonBody.name,
+            img_url: response.jsonBody.image_url
+          }, function (err, business){
+            res.json({ business})
+          })
+      })
+    }
+  })
+
+})
 
 router.route('/profile/:userId')
 .get((req, res) => {
@@ -85,11 +114,7 @@ router.route('/profile/:userId')
   })
 })
 
-router.route('/show/:businessId').post(businessController.createBusiness)
-
-
-
-
+router.route('show/:id').post(businessController.createBusiness)
 
 
 module.exports = router
