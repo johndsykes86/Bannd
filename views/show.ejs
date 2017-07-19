@@ -1,7 +1,16 @@
-
 <h1>SHOW EACH Business</h1>
 <%= data.name %>
 <br>
 <%= data.location.display_address %>
 <br>
 <%= data.phone %>
+</br>
+<%// if (commentData) {%>
+  <%//= commentData.title %>
+  <%//= commentData.body %>
+<%// } %>
+<form action="<%= `/show/${data.id}` %>" method="post">
+  <input type="text" name="title" value="">
+  <textarea name="body" rows="8" cols="80" placeholder="Write your story...."></textarea>
+  <input type="submit" id="story-create" value="Post Story" >
+</form>
