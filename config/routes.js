@@ -127,9 +127,13 @@ router.route('/show/:businessId/comment')
               if(err) return console.log(err)
 
               business.comments.push(newComment)
+              console.log(user._id);
+              user.comments.push(newComment)
+              user.save()
+              console.log(user.comments);
               business.save((err, comment)=>{
                 if(err) return console.log(err)
-                console.log(comment);
+
                 res.redirect('/show/' + req.params.businessId)
               })
             })
@@ -146,9 +150,13 @@ router.route('/show/:businessId/comment')
           if(err) return console.log(err)
 
           business.comments.push(newComment)
+          console.log(user._id);
+          user.comments.push(newComment)
+          user.save()
+          console.log(user.comments);
           business.save((err, comment)=>{
             if(err) return console.log(err)
-            console.log(comment);
+
             res.redirect('/show/' + req.params.businessId)
           })
         })
@@ -157,11 +165,14 @@ router.route('/show/:businessId/comment')
   })
 
 router.route('/show/:businessId/comment/:commentId').get((req, res) => {
-  console.log('Working HITS');
+  console.log('Working GETS');
 })
 
-router.route('/show/:businessId/comment/:commentId').patch((req, res) => {
-  console.log('Working HITS');
+router.route('/show/:businessId/comment/:commentId').post((req, res) => {
+  console.log(req.body);
+  Comments.findByIdAndUpdate(req.params.commentId, req.body, {new: true}, (err, updateComment) => {
+    res.redirect('/show/' + req.params.businessId)
+  })
 })
 
 
