@@ -103,7 +103,7 @@ $('.edit-comment').on('click', function(){
   var postUrl = form.attr('action')
 
 
-  form.attr('method', 'patch')
+  // form.attr('method', 'patch')
   title.attr('value', titleText)
   body.text(bodyText)
   submit.attr('value', 'Edit Story')

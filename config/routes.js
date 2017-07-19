@@ -157,11 +157,14 @@ router.route('/show/:businessId/comment')
   })
 
 router.route('/show/:businessId/comment/:commentId').get((req, res) => {
-  console.log('Working HITS');
+  console.log('Working GETS');
 })
 
-router.route('/show/:businessId/comment/:commentId').patch((req, res) => {
-  console.log('Working HITS');
+router.route('/show/:businessId/comment/:commentId').post((req, res) => {
+  console.log(req.body);
+  Comments.findByIdAndUpdate(req.params.commentId, req.body, {new: true}, (err, updateComment) => {
+    res.redirect('/show/' + req.params.businessId)
+  })
 })
 
 
