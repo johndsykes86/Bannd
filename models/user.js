@@ -6,7 +6,7 @@ var User = mongoose.Schema({
     email        : String,
     password     : String,
   },
-  comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'comment'}]
+  comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
 });
 
 User.methods.encrypt = function(password){
