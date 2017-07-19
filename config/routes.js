@@ -127,9 +127,13 @@ router.route('/show/:businessId/comment')
               if(err) return console.log(err)
 
               business.comments.push(newComment)
+              console.log(user._id);
+              user.comments.push(newComment)
+              user.save()
+              console.log(user.comments);
               business.save((err, comment)=>{
                 if(err) return console.log(err)
-                console.log(comment);
+
                 res.redirect('/show/' + req.params.businessId)
               })
             })
@@ -146,9 +150,13 @@ router.route('/show/:businessId/comment')
           if(err) return console.log(err)
 
           business.comments.push(newComment)
+          console.log(user._id);
+          user.comments.push(newComment)
+          user.save()
+          console.log(user.comments);
           business.save((err, comment)=>{
             if(err) return console.log(err)
-            console.log(comment);
+
             res.redirect('/show/' + req.params.businessId)
           })
         })
