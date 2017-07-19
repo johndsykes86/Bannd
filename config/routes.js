@@ -72,12 +72,34 @@ router.route("/search/:searchTerm/:page/:locationTerm")
 
 router.route('/show/:businessId')
 .get((req, res) => {
-  client.business(req.params.businessId).then(response => {
-      console.log(response.jsonBody.id);
-      res.render('show', {data: response.jsonBody})
-    }).catch(e => {
-      console.log(e);
-    });
+  if (Business.findOne(req.params.businessId)) {
+    Business.findOne(req.params.businessId, (err, business) => {
+      console.log(business);
+      // var dataComents = [];
+      // for (var i = 0; i < business.comments.length; i++) {
+      //   Comments.findOne(business.comments[i], (err, com) => {
+      //     console.log(com);
+      //     dataComents.push(
+      //       {
+      //         title: com.title,
+      //         body: com.body
+      //       }
+      //     )
+      //   })
+      // }
+      // console.log(dataComents);
+      res.render('show', {data: business})
+    })
+
+  } else {
+    client.business(req.params.businessId).then(response => {
+        console.log(response.jsonBody.id);
+        res.render('show', {data: response.jsonBody})
+      }).catch(e => {
+        console.log(e);
+      });
+  }
+
 })
 
 router.route('/show/:businessId').post((req, res) =>{
@@ -98,7 +120,7 @@ router.route('/show/:businessId').post((req, res) =>{
           Business.create({
             yelpID: response.jsonBody.id,
             name: response.jsonBody.name,
-            address: response.jsonBody.name,
+            address: response.jsonBody.location.address1,
             img_url: response.jsonBody.image_url
           }, function (err, business){
             res.json({ business})
@@ -120,20 +142,37 @@ router.route('/profile/:userId')
 
 // router.route('/show/:businessId').post(businessController.createBusiness)
 
-router.route('/show/:businessId')
+router.route('/show/:businessId/comment')
   .post((req, res) => {
     //comment is album
     //artist is buissness
+    Business.findOne(req.params.businessId, (err, business) => {
+      if(err) return console.log(err)
 
-    Comments.create(req.body, (err, commentCreated) => {
-      res.redirect('/show/' + req.params.businessId)
+      var newComment = new Comments(req.body)
+      newComment._business = business.id
 
-      // res.send(commentCreated)
+      newComment.save((err) => {
+        if(err) return console.log(err)
+
+        business.comments.push(newComment)
+        business.save((err, comment)=>{
+          if(err) return console.log(err)
+          // res.json(comment)
+          res.redirect('/show/' + req.params.businessId)
+        })
+      })
     })
+
+    // Comments.create(req.body, (err, commentCreated) => {
+    //   res.redirect('/show/' + req.params.businessId)
+    //
+    //   // res.send(commentCreated)
+    // })
   })
 
 
-router.route('show/:id').post(businessController.createBusiness)
+// router.route('show/:id').post(businessController.createBusiness)
 
 
 

@@ -1,15 +1,22 @@
 <h1>SHOW EACH Business</h1>
-<%= data.name %>
+<%//= data.name %>
 <br>
-<%= data.location.display_address %>
+<%//= data.location.display_address %>
 <br>
-<%= data.phone %>
+<%//= data.phone %>
 </br>
-<%// if (commentData) {%>
-  <%//= commentData.title %>
-  <%//= commentData.body %>
-<%// } %>
-<form action="<%= `/show/${data.id}` %>" method="post">
+<% if (data.comments) {%>
+  <%= data.name %>
+  <%= data.address %>
+  <% for (var i = 0; i < data.comments.length; i++) { %>
+    <%= data.comments[i].title %>
+    <%= data.comments[i].body %>
+  <% } %>
+
+<% } else { %>
+  <%= data.location.display_address %>
+<% } %>
+<form action="<%= `/show/${data.id}/comment` %>" method="post">
   <input type="text" name="title" value="">
   <textarea name="body" rows="8" cols="80" placeholder="Write your story...."></textarea>
   <input type="submit" id="story-create" value="Post Story" >
