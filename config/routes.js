@@ -8,7 +8,11 @@ var yelp = require('yelp-fusion');
 var dotenv = require('dotenv').load()
 var client = yelp.client(process.env.YELP_API_KEY)
 var User = require('../models/user')
+
+var Comments = require('../models/comment')
+
 var Business = require('../models/business')
+
 
 function authenticateUser(req, res, next) {
   // If the user is authenticated, then we continue the execution
@@ -52,7 +56,6 @@ router.route("/search/:searchTerm/:locationTerm")
 // Page 1, 2, 3... of results
 router.route("/search/:searchTerm/:page/:locationTerm")
   .get((req, res) => {
-    console.log('here');
     console.log(req.params.offset);
     client.search({
       term: req.params.searchTerm,
@@ -70,7 +73,7 @@ router.route("/search/:searchTerm/:page/:locationTerm")
 router.route('/show/:businessId')
 .get((req, res) => {
   client.business(req.params.businessId).then(response => {
-      console.log(response.jsonBody.name);
+      console.log(response.jsonBody.id);
       res.render('show', {data: response.jsonBody})
     }).catch(e => {
       console.log(e);
@@ -114,7 +117,24 @@ router.route('/profile/:userId')
   })
 })
 
+
+// router.route('/show/:businessId').post(businessController.createBusiness)
+
+router.route('/show/:businessId')
+  .post((req, res) => {
+    //comment is album
+    //artist is buissness
+
+    Comments.create(req.body, (err, commentCreated) => {
+      res.redirect('/show/' + req.params.businessId)
+
+      // res.send(commentCreated)
+    })
+  })
+
+
 router.route('show/:id').post(businessController.createBusiness)
+
 
 
 module.exports = router
