@@ -1,20 +1,15 @@
 <h1>SHOW EACH Business</h1>
-<%//= data.name %>
-<br>
-<%//= data.location.display_address %>
-<br>
-<%//= data.phone %>
-</br>
 <% if (data.comments) {%>
-  <%= data.name %>
-  <%= data.address %>
+  <h2><%= data.name %></h2>
+  <h3><%= data.address %></h3></br>
   <% for (var i = 0; i < data.comments.length; i++) { %>
-    <%= data.comments[i].title %>
-    <%= data.comments[i].body %>
+    <p>Title: <%= data.comments[i].title %></p>
+    <p><%= data.comments[i].body %></p></br>
   <% } %>
 
 <% } else { %>
-  <%= data.location.display_address %>
+  <h2><%= data.name %></h2>
+  <h3><%= data.location.display_address %></h3>
 <% } %>
 <form action="<%= `/show/${data.id}/comment` %>" method="post">
   <input type="text" name="title" value="">

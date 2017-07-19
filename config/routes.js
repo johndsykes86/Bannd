@@ -69,39 +69,31 @@ router.route("/search/:searchTerm/:page/:locationTerm")
   })
 
 // show each business
-
 router.route('/show/:businessId')
 .get((req, res) => {
-  if (Business.findOne(req.params.businessId)) {
-    Business.findOne(req.params.businessId, (err, business) => {
-      console.log(business);
-      // var dataComents = [];
-      // for (var i = 0; i < business.comments.length; i++) {
-      //   Comments.findOne(business.comments[i], (err, com) => {
-      //     console.log(com);
-      //     dataComents.push(
-      //       {
-      //         title: com.title,
-      //         body: com.body
-      //       }
-      //     )
-      //   })
-      // }
-      // console.log(dataComents);
-      res.render('show', {data: business})
-    })
+  Business.findOne({yelpID: req.params.businessId}, (err, booBusiness) => {
+    if (booBusiness) {
+      Business.findOne(req.params.businessId, (err, business) => {
+        console.log(Business.findById(req.params.businessId));
+        if(err) console.log(err);
+        // console.log(req.params.businessId);
+        res.render('show', {data: business})
+      })
 
-  } else {
-    client.business(req.params.businessId).then(response => {
-        console.log(response.jsonBody.id);
-        res.render('show', {data: response.jsonBody})
-      }).catch(e => {
-        console.log(e);
-      });
-  }
+    } else {
+      client.business(req.params.businessId).then(response => {
+          console.log(response.jsonBody.id);
+          res.render('show', {data: response.jsonBody})
+        }).catch(e => {
+          console.log(e);
+        });
+    }
+  })
+
 
 })
 
+// Creates business in db
 router.route('/show/:businessId').post((req, res) =>{
   console.log('req.params.businessId', req.params.businessId)
   Business.findOne({yelpID: req.params.businessId}, (err, business)=>{
@@ -146,7 +138,8 @@ router.route('/show/:businessId/comment')
   .post((req, res) => {
     //comment is album
     //artist is buissness
-    Business.findOne(req.params.businessId, (err, business) => {
+    Business.findOne({yelpID: req.params.businessId}, (err, business) => {
+      // if business is true then create comment normal, if not create business with post above then create comment
       if(err) return console.log(err)
 
       var newComment = new Comments(req.body)
