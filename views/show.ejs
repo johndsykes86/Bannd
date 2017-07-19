@@ -9,6 +9,8 @@
       Title: <p id="title-<%= `${i}` %>"><%= data.comments[i].title %></p>
       <p id="body-<%= `${i}` %>"><%= data.comments[i].body %></p>
       <a id="<%=`${i}`%>" class="edit-comment" >Edit</a>
+      <button class="delete-comment" type=
+      "submit" method="delete">Delete comment</button>
     </div>
 
   <% } %>

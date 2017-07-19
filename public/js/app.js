@@ -103,10 +103,15 @@ $('.edit-comment').on('click', function(){
   var postUrl = form.attr('action')
 
 
-  form.attr('method', 'patch')
   title.attr('value', titleText)
   body.text(bodyText)
   submit.attr('value', 'Edit Story')
   form.attr('action', `${postUrl}/${$('.each-comment').attr('id')}`)
 
+})
+
+$('.delete-comment').on("click", function(){
+  businessId = ($('.edit-comment')[0].baseURI)
+  commentId= $('.each-comment')[0].id
+  $.ajax({url:`${businessId}/comment/${commentId}`, method: "delete"})
 })
