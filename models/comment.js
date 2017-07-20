@@ -8,8 +8,6 @@ const commentSchema = new mongoose.Schema({
   _business: {type:mongoose.Schema.Types.ObjectId, ref: 'Business'}
 })
 
-commentSchema.pre('findOne', function() {
-    this.populate('_business')
-  })
+
 
 module.exports = mongoose.model('Comment', commentSchema)
