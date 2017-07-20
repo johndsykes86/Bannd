@@ -7,3 +7,7 @@ textarea {
    width: 200px;
    overflow: hidden;
 }*/
+
+.story-title {
+  font-weight:bold;
+}
