@@ -9,7 +9,12 @@ function home(req, res) {
 }
 
 function landing(req, res) {
-  res.render('landing.ejs', {layout: 'landing'})
+  if (!user){
+    res.render('landing.ejs', {layout: 'landing'})
+  } else {
+    res.redirect('/home')
+  }
+
 }
 
 module.exports = {
