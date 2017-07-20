@@ -45,6 +45,7 @@ router.route("/search/:searchTerm/:locationTerm")
     console.log('searching');
     client.search({
       term: req.params.searchTerm,
+      limit: 12,
       location: req.params.locationTerm
     }).then(response => {
       res.send(response.jsonBody)
@@ -59,7 +60,8 @@ router.route("/search/:searchTerm/:page/:locationTerm")
     console.log(req.params.offset);
     client.search({
       term: req.params.searchTerm,
-      offset: 20 * (req.params.page -1),
+      limit: 12,
+      offset: 12 * (req.params.page -1),
       location: req.params.locationTerm
     }).then(response => {
       res.send(response.jsonBody)
