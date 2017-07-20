@@ -48,6 +48,7 @@ router.route("/search/:searchTerm/:locationTerm")
     console.log('searching');
     client.search({
       term: req.params.searchTerm,
+      limit: 12,
       location: req.params.locationTerm
     }).then(response => {
       res.send(response.jsonBody)
@@ -62,7 +63,8 @@ router.route("/search/:searchTerm/:page/:locationTerm")
     console.log(req.params.offset);
     client.search({
       term: req.params.searchTerm,
-      offset: 20 * (req.params.page -1),
+      limit: 12,
+      offset: 12 * (req.params.page -1),
       location: req.params.locationTerm
     }).then(response => {
       res.send(response.jsonBody)
@@ -121,7 +123,10 @@ router.route('/show/:businessId/comment')
           Business.create({
             yelpID: response.jsonBody.id,
             name: response.jsonBody.name,
-            address: response.jsonBody.location.display_address,
+            address: response.jsonBody.location.address1,
+            city: response.jsonBody.location.city,
+            state: response.jsonBody.location.state,
+            zip_code: response.jsonBody.location.zip_code,
             img_url: response.jsonBody.image_url
           }, function (err, business){
             var newComment = new Comments(req.body)
