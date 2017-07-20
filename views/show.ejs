@@ -2,15 +2,17 @@
 <% var routeId = data.id %>
 <% if (data.comments) {%>
   <% routeId = data.yelpID %>
-  <h2><%= data.name %></h2>
+  <h2 id="<%= routeId %>"><%= data.name %></h2>
   <h3><%= data.address %></h3></br>
   <% for (var i = 0; i < data.comments.length; i++) { %>
     <div class="each-comment" id="<%= `${data.comments[i].id}` %>">
       Title: <p id="title-<%= `${i}` %>"><%= data.comments[i].title %></p>
       <p id="body-<%= `${i}` %>"><%= data.comments[i].body %></p>
       <a id="<%=`${i}`%>" class="edit-comment" >Edit</a>
-      <button class="delete-comment" type=
-      "submit" method="delete">Delete comment</button>
+      <form action="<%= `/show/${routeId}/comment/${data.comments[i].id}/x` %>" method="post">
+        <button class="delete-comment" type="submit" >Delete comment</button>
+      </form>
+
     </div>
 
   <% } %>
