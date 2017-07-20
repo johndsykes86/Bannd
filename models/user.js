@@ -6,8 +6,9 @@ var User = mongoose.Schema({
     email        : String,
     password     : String,
   },
-  firstName: String,
-  lastName: String,
+  firstName: {type: String, required: true},
+  lastName: {type: String, required: true},
+  userName: {type: String, required: true},
   comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
 });
 
