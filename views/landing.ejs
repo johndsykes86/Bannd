@@ -32,9 +32,12 @@
                 <li><a href="/logout">Logout</a></li>
                 <li><a href="/secret">Secret Page (Authenticated Users Only)</a></li>
                 <h1>WORKS</h1>
-                <input type="text" placeholder="Search" id="search-text">
-                <input type="text" placeholder="Location" id="location-text">
-                <button type="button" id="search-submit">CLICK</button>
+                <form id="search-form">
+                  <input type="text" placeholder="Search" id="search-text">
+                  <input type="text" placeholder="Location" id="location-text">
+                  <button type="submit" id="search-submit">Search</button>
+                </form>
+
               <% } else { %>
                 <li><a href="/login">Login</a></li>
                 <li><a href="/signup">Signup</a></li>

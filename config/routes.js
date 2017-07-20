@@ -81,7 +81,10 @@ router.route('/show/:businessId')
       Business.findOne({yelpID: req.params.businessId}, (err, business) => {
         console.log(business);
         if(err) console.log(err);
-        res.render('show', {data: business})
+        User.find({}, (err, users)=> {
+          res.render('show', {data: business, users: users})
+        })
+
       })
 
     } else {

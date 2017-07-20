@@ -6,15 +6,27 @@
   <h3><%= data.address %></h3>
   <h4><%= `${data.city}, ${data.state} ${data.zip_code}` %></h4></br>
   <% for (var i = 0; i < data.comments.length; i++) { %>
-    <div class="panel panel-default">
+    <div class="col-sm-2 col-md-2">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <% for (var j = 0; j < users.length; j++) { %>
+            <% if (users[j]._id.toString() == data.comments[i]._by.toString()) { %>
+              <h5 id="title-<%= `${i}` %>" class="story-title">Posted By:</h5>
+              <%= users[j].userName %>
+            <% } %>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default col-sm-10 col-md-10">
       <div class="panel-body">
         <div class="each-comment" id="<%= `${data.comments[i].id}` %>">
           <h5 id="title-<%= `${i}` %>" class="story-title"><%= data.comments[i].title %></h5>
           <p id="body-<%= `${i}` %>"><%= data.comments[i].body %></p>
           <% if(data.comments[i]._by.toString() === user.id.toString()){ %>
-            <button id="<%=`${i}`%>" class="edit-comment">Edit</button>
+            <button id="<%=`${i}`%>" class="edit-comment btn btn-primary">Edit</button>
             <form action="<%= `/show/${routeId}/comment/${data.comments[i].id}/x` %>" method="post">
-              <button class="delete-comment" type="submit" >Delete comment</button>
+              <button class="delete-comment btn btn-danger" type="submit" >Delete comment</button>
             </form>
           <% } %>
         </div>
@@ -33,5 +45,5 @@
 <form class="form" action="<%= `/show/${routeId}/comment` %>" method="post">
   <input class="title" type="text" name="title" value="" placeholder="Title">
   <textarea class="body" name="body" rows="8" cols="80" placeholder="Write your story...." ></textarea>
-  <input class="submit" type="submit" id="story-create" value="Post Story" >
+  <input class="submit btn btn-success green" type="submit" id="story-create" value="Post Story" >
 </form>
