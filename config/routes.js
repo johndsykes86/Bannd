@@ -120,7 +120,10 @@ router.route('/show/:businessId/comment')
           Business.create({
             yelpID: response.jsonBody.id,
             name: response.jsonBody.name,
-            address: response.jsonBody.location.display_address,
+            address: response.jsonBody.location.address1,
+            city: response.jsonBody.location.city,
+            state: response.jsonBody.location.state,
+            zip_code: response.jsonBody.location.zip_code,
             img_url: response.jsonBody.image_url
           }, function (err, business){
             var newComment = new Comments(req.body)

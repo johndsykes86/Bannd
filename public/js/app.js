@@ -50,17 +50,16 @@ searchForm.on('submit', (e) => {
           var thumbnail = $('<div class="thumbnail"></div>')
           var aName = $('<a id="business-link">')
           var businessImg = $('<img src="'+result.image_url+'" class="img-thumbnail" style="height: 200px;  display: block;">')
+          var liAddress1 = $('<li>')
+          var cityStateZip = $('<li>')
+
           aName.attr('href', `/show/${result.id}`)
           aName.html(result.name)
 
-          var liAddress = $('<li>')
-          liAddress.html(result.location.address1)
+          liAddress1.html(result.location.address1)
+          cityStateZip.html(`${result.location.city}, ${result.location.state} ${result.location.zip_code}`)
 
-          var comment = $('<textarea>')
-          comment.attr('rows', 4)
-          comment.attr('columns', 50)
-
-          thumbnail.append(businessImg, aName, liAddress, liAddress)
+          thumbnail.append(businessImg, aName, liAddress1, cityStateZip)
           eachBusiness.append(thumbnail)
           display.append(eachBusiness)
         })
@@ -75,17 +74,16 @@ searchForm.on('submit', (e) => {
       var thumbnail = $('<div class="thumbnail"></div>')
       var aName = $('<a id="business-link">')
       var businessImg = $('<img src="'+result.image_url+'" class="img-thumbnail" style="height: 200px;  display: block;">')
+      var liAddress1 = $('<li>')
+      var cityStateZip = $('<li>')
+
       aName.attr('href', `/show/${result.id}`)
       aName.html(result.name)
 
-      var liAddress = $('<li>')
-      liAddress.html(result.location.address1)
+      liAddress1.html(result.location.address1)
+      cityStateZip.html(`${result.location.city}, ${result.location.state} ${result.location.zip_code}`)
 
-      var comment = $('<textarea>')
-      comment.attr('rows', 4)
-      comment.attr('columns', 50)
-
-      thumbnail.append(businessImg, aName, liAddress, liAddress)
+      thumbnail.append(businessImg, aName, liAddress1, cityStateZip)
       eachBusiness.append(thumbnail)
       display.append(eachBusiness)
     })
@@ -93,6 +91,7 @@ searchForm.on('submit', (e) => {
   }
   $.ajax(rs).done(cb)
 })
+
 
 $('.edit-comment').on('click', function(){
   var id = $(this).attr('id')
@@ -107,7 +106,7 @@ $('.edit-comment').on('click', function(){
   title.attr('value', titleText)
   body.text(bodyText)
   submit.attr('value', 'Edit Story')
-  form.attr('action', `${postUrl}/${$('.each-comment').attr('id')}`)
+  form.attr('action', `${postUrl}/${$(this).parents().attr('id')}`)
 })
 
 $('.delete-comment').on("click", function(){

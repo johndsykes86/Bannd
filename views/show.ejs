@@ -3,22 +3,26 @@
 <% if (data.comments) {%>
   <% routeId = data.yelpID %>
   <h2 id="<%= routeId %>"><%= data.name %></h2>
-  <h3><%= data.address %></h3></br>
+  <h3><%= data.address %></h3>
+  <h4><%= `${data.city}, ${data.state} ${data.zip_code}` %></h4></br>
   <% for (var i = 0; i < data.comments.length; i++) { %>
     <div class="each-comment" id="<%= `${data.comments[i].id}` %>">
       Title: <p id="title-<%= `${i}` %>"><%= data.comments[i].title %></p>
       <p id="body-<%= `${i}` %>"><%= data.comments[i].body %></p>
-      <a id="<%=`${i}`%>" class="edit-comment" >Edit</a>
-      <form action="<%= `/show/${routeId}/comment/${data.comments[i].id}/x` %>" method="post">
-        <button class="delete-comment" type="submit" >Delete comment</button>
-      </form>
+      <% if(data.comments[i]._by.toString() === user.id.toString()){ %>
+        <a id="<%=`${i}`%>" class="edit-comment" >Edit</a>
+        <form action="<%= `/show/${routeId}/comment/${data.comments[i].id}/x` %>" method="post">
+          <button class="delete-comment" type="submit" >Delete comment</button>
+        </form>
+      <% } %>
     </div>
 
   <% } %>
 
 <% } else { %>
   <h2><%= data.name %></h2>
-  <h3><%= data.location.display_address %></h3>
+  <h3><%= data.location.address1 %></h3>
+  <h4><%= `${data.location.city}, ${data.location.state} ${data.location.zip_code}` %></h4>
 <% } %>
 
 <form class="form" action="<%= `/show/${routeId}/comment` %>" method="post">
