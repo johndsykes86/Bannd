@@ -1,0 +1,64 @@
+
+
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title>Bannd</title>
+      <style>
+
+      * {
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          box-sizing: border-box;
+      }
+
+      /*sets size of parent containers so we can define the height of the full-length container by percentage*/
+      html,body{
+        height: 100%;
+      }
+
+      .img {
+          background-image: url("http://i.imgur.com/iMcr6c3.jpg") no-repeat center center;
+          -webkit-background-size: cover;
+          background-size: cover;
+          color: white;
+          height: 100%;
+      }
+
+      .description{
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(30%, -50%);
+      }
+
+      .description-text {
+        color: #FBF5F3
+      }
+
+      .description-text h1{
+        font-size: 60px;
+      }
+
+      .description-text p {
+        font-size: 20px;
+      }
+      </style>
+    </head>
+    <body>
+      <div class="img">
+        <div class="container">
+          <div class="description">
+            <div class="description-text">
+              <h1>Bannd</h1>
+            <p>A website to share those times you did way too much at the club.<br>Or the post office. Or church...</p>
+              <p>Powered by <span><img src="https://s3-media3.fl.yelpcdn.com/assets/srv0/styleguide/24e1fe240f00/assets/img/brand_guidelines/yelp_fullcolor_outline.png" alt=""></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+  </html>

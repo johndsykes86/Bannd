@@ -23,6 +23,9 @@ function authenticateUser(req, res, next) {
 }
 
 router.route('/')
+  .get(staticsController.landing)
+
+router.route('/home')
   .get(staticsController.home);
 
 router.route('/signup')
