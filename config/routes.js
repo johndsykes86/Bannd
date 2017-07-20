@@ -95,10 +95,12 @@ router.route('/show/:businessId')
 // User profile view
 router.route('/profile/:userId')
 .get((req, res) => {
-  User.findById(req.params.userId, (err, user) => {
-    // console.log(user.local)
+  User.findOne({_id: req.params.userId}).populate({path: 'comments', populate: {path: '_business'}}).exec( function(err, user) {
+    // Business.findOne({_id: comments[0]._business})
+    console.log(user);
     res.render('user', {userData: user})
   })
+
 })
 
 
@@ -176,10 +178,10 @@ router.route('/show/:businessId/comment/:commentId').post((req, res) => {
 })
 
 
-router.route('/show/:businessId/comment/:commentId').delete((req, res) =>{
+router.route('/show/:businessId/comment/:commentId/x').post((req, res) =>{
   Comments.findByIdAndRemove(req.params.commentId, (err,comment)=> {
     if(err) return console.log(err)
-    res.method = 'GET'
+
     res.redirect('/show/'+req.params.businessId)
   })
 })

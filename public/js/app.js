@@ -111,7 +111,7 @@ $('.edit-comment').on('click', function(){
 })
 
 $('.delete-comment').on("click", function(){
-  businessId = ($('.edit-comment')[0].baseURI)
-  commentId= $('.each-comment')[0].id
-  $.ajax({url:`${businessId}/comment/${commentId}`, method: "delete"})
+  businessId = ($('h2').attr('id'))
+  commentId= $(this).parent().parent().attr('id')
+  $.ajax({url:`/show/${businessId}/comment/${commentId}/x`, method: "post"})
 })
