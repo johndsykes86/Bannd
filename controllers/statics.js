@@ -4,7 +4,7 @@ function home(req, res) {
 }
 
 function landing(req, res) {
-  res.render('landing.ejs')
+  res.render('landing.ejs', {layout: 'landing'})
 }
 
 module.exports = {
