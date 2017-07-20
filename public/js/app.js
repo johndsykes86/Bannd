@@ -6,13 +6,13 @@ var businessShow = $('#business-link')
 var pageList = $('.page-list')
 var page;
 var thispage;
-
-
+var searchForm = $('#search-form')
 
 yelpData = ''
 
 
-searchSubmit.on('click', () => {
+searchForm.on('submit', (e) => {
+  e.preventDefault()
   console.log('click');
 
   var rs = {
@@ -21,7 +21,6 @@ searchSubmit.on('click', () => {
   }
 
   function cb(d) {
-    // console.log(d + '#################');
     display.empty()
     pageList.empty()
     var pageNum = 50
@@ -47,50 +46,52 @@ searchSubmit.on('click', () => {
         console.log(d);
         display.empty()
         d.businesses.forEach((result) => {
+          var eachBusiness = $('<div class="col-sm-6 col-md-4" id="each-business"></div>')
+          var thumbnail = $('<div class="thumbnail"></div>')
           var aName = $('<a id="business-link">')
+          var businessImg = $('<img src="'+result.image_url+'" class="img-thumbnail" style="height: 200px;  display: block;">')
+          var liAddress1 = $('<li>')
+          var cityStateZip = $('<li>')
+
           aName.attr('href', `/show/${result.id}`)
           aName.html(result.name)
-          display.append(aName)
 
+          liAddress1.html(result.location.address1)
+          cityStateZip.html(`${result.location.city}, ${result.location.state} ${result.location.zip_code}`)
 
-          var liAddress = $('<li>')
-          liAddress.html(result.location.address1)
-          display.append(liAddress)
-
-          var comment = $('<textarea>')
-          comment.attr('rows', 4)
-          comment.attr('columns', 50)
-          display.append(comment)
+          thumbnail.append(businessImg, aName, liAddress1, cityStateZip)
+          eachBusiness.append(thumbnail)
+          display.append(eachBusiness)
         })
         yelpData = d
       }
-
       $.ajax(rs).done(cb)
     })
 
-
     d.businesses.forEach((result) => {
-      console.log(result);
+      console.log(result.image_url);
+      var eachBusiness = $('<div class="col-sm-6 col-md-4" id="each-business"></div>')
+      var thumbnail = $('<div class="thumbnail"></div>')
       var aName = $('<a id="business-link">')
+      var businessImg = $('<img src="'+result.image_url+'" class="img-thumbnail" style="height: 200px;  display: block;">')
+      var liAddress1 = $('<li>')
+      var cityStateZip = $('<li>')
+
       aName.attr('href', `/show/${result.id}`)
       aName.html(result.name)
-      display.append(aName)
 
+      liAddress1.html(result.location.address1)
+      cityStateZip.html(`${result.location.city}, ${result.location.state} ${result.location.zip_code}`)
 
-      var liAddress = $('<li>')
-      liAddress.html(result.location.address1)
-      display.append(liAddress)
-
-      var comment = $('<textarea>')
-      comment.attr('rows', 4)
-      comment.attr('columns', 50)
-      display.append(comment)
+      thumbnail.append(businessImg, aName, liAddress1, cityStateZip)
+      eachBusiness.append(thumbnail)
+      display.append(eachBusiness)
     })
     yelpData = d
   }
-
   $.ajax(rs).done(cb)
 })
+
 
 $('.edit-comment').on('click', function(){
   var id = $(this).attr('id')
@@ -102,12 +103,10 @@ $('.edit-comment').on('click', function(){
   var submit = $('.submit')
   var postUrl = form.attr('action')
 
-
   title.attr('value', titleText)
   body.text(bodyText)
   submit.attr('value', 'Edit Story')
-  form.attr('action', `${postUrl}/${$('.each-comment').attr('id')}`)
-
+  form.attr('action', `${postUrl}/${$(this).parents().attr('id')}`)
 })
 
 $('.delete-comment').on("click", function(){
