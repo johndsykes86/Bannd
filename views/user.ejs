@@ -1,2 +1,6 @@
 <h1><%= userData.local.email %></h1>
-<%= userData.comments[0].title %>
+<% for(i = 0; i < userData.comments.length; i ++) { %>
+Business: <p><%= userData.comments[i]._business.name %></p>
+Title: <p><%= userData.comments[i].title %></p>
+Story: <p><%= userData.comments[i].body %></p>
+<% } %>

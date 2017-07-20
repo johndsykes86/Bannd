@@ -95,10 +95,12 @@ router.route('/show/:businessId')
 // User profile view
 router.route('/profile/:userId')
 .get((req, res) => {
-  User.findOne({_id: req.params.userId}, (err, user) => {
-    // console.log(user.local)
+  User.findOne({_id: req.params.userId}).populate({path: 'comments', populate: {path: '_business'}}).exec( function(err, user) {
+    // Business.findOne({_id: comments[0]._business})
+    console.log(user);
     res.render('user', {userData: user})
   })
+
 })
 
 

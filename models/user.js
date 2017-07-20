@@ -6,12 +6,12 @@ var User = mongoose.Schema({
     email        : String,
     password     : String,
   },
+  firstName: String,
+  lastName: String,
   comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
 });
 
-User.pre("findOne", function () {
-  this.populate("comments")
-})
+
 
 User.methods.encrypt = function(password){
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
