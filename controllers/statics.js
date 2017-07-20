@@ -1,6 +1,10 @@
 // GET /
 function home(req, res) {
+if (user){
   res.render('index.ejs');
+} else {
+  res.redirect('/login')
+}
 }
 
 function landing(req, res) {
