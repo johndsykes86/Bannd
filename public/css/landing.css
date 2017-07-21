@@ -10,6 +10,12 @@ html, body, .container{
   height: 100%;
 }
 
+nav a {
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+
 .img {
     background-image: url("http://i.imgur.com/iMcr6c3.jpg");
     -webkit-background-size: cover;

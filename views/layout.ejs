@@ -23,8 +23,8 @@
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <% if (user) { %>
         <div class="collapse navbar-collapse" id="user-menu">
+        <% if (user) { %>
           <form id="search-form" class="navbar-form navbar-left" >
             <input type="text" class="form-control" placeholder="Find Business" id="search-text">
             <input type="text" class="form-control" placeholder="Location" id="location-text">
@@ -37,7 +37,10 @@
                   <li><a href="<%= `/profile/${user.id}` %>">Profile</a></li>
                   <li role="separator" class="divider"></li>
                   <li><a href="/logout">Logout</a></li>
+                    </ul>
                   <% } else { %>
+                    <ul class="nav navbar-nav navbar-right">
+
                     <li><a href="/login">Login</a></li>
                     <li><a href="/signup">Signup</a></li>
               <% } %>
