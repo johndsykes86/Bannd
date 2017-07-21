@@ -45,4 +45,4 @@ app.use(function (req, res, next){
 var routes = require('./config/routes');
 app.use(routes);
 
-app.listen(PORT);
+app.listen(port);
