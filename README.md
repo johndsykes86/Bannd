@@ -1,0 +1,71 @@
+Explanations of the technologies used (including outside APIs).
+A couple of paragraphs about the general approach you took, including division of tasks.
+Installation instructions for the app. Exactly what must someone do to run your app locally on their machine?
+Link to your Trello.
+Links to your planning docs, including data models, wireframes, and your presentation deck.
+Descriptions of any unsolved problems or major hurdles your team had to overcome.
+
+# Bannd
+---
+
+### Summary
+
+An app that allows you to post stories to businesses you have been banned from
+
+---
+
+### Approach
+
+Local installation instructions:
+
+Download the repository to your local machine and open your terminal.
+
+Run:
+
+```npm install```
+
+Open a new tab on terminal and run:
+
+```mongod```
+
+Open a new tab on termial and run: 
+
+```node server.js```
+
+On a web browser, go to localhost:3000
+
+---
+
+### Division of Tasks
+
+Johnathon(Project Manager) - Back end and styling of front end
+
+Connie - Front end and back end routes
+
+Kyle - Back end and display of front end views
+
+
+---
+
+### Planning docs
+
+[Trello](https://trello.com/b/YC10vTgr/project-3)
+
+[ERD](https://www.gliffy.com/go/share/s8daits8qx1stp44xn6t)
+
+[Wireframes]()
+
+
+---
+
+### Hurdles
+
+* We had issues deploying to Heroku
+* Merge issues with GitHub and the Git workflow
+* The search bar only works on the home page
+* Route issues
+
+
+* Upvoting story
+* User only posting one story to a business
+* Ban counts for user and business
