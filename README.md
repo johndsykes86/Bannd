@@ -1,10 +1,3 @@
-Explanations of the technologies used (including outside APIs).
-A couple of paragraphs about the general approach you took, including division of tasks.
-Installation instructions for the app. Exactly what must someone do to run your app locally on their machine?
-Link to your Trello.
-Links to your planning docs, including data models, wireframes, and your presentation deck.
-Descriptions of any unsolved problems or major hurdles your team had to overcome.
-
 # Bannd
 ---
 
@@ -28,7 +21,7 @@ Open a new tab on terminal and run:
 
 ```mongod```
 
-Open a new tab on termial and run: 
+Open a new tab on termial and run:
 
 ```node server.js```
 
