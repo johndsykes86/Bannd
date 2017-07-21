@@ -23,8 +23,8 @@
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
+        <% if (user) { %>
         <div class="collapse navbar-collapse" id="user-menu">
-          <% if (user) { %>
           <form id="search-form" class="navbar-form navbar-left" >
             <input type="text" class="form-control" placeholder="Find Business" id="search-text">
             <input type="text" class="form-control" placeholder="Location" id="location-text">
@@ -32,7 +32,6 @@
           </form>
           <ul class="nav navbar-nav navbar-right" id='dropdown'>
               <li class="dropdown">
-
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello <%= user.firstName %><span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="<%= `/profile/${user.id}` %>">Profile</a></li>
