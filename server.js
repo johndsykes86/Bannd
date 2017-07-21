@@ -9,7 +9,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var MongoDBStore = require('connect-mongodb-session')(session);
-var dbURL = 'mongodb://localhost/Bannd'
+var dbURL = 'mongodb://localhost/bannd'
+var PORT = process.env.PORT || 3000
 
 
 const store = new MongoDBStore({
@@ -18,10 +19,7 @@ const store = new MongoDBStore({
 })
 
 
-mongoose.connect(dbURL, (err) => {
-  console.log(err||`MongoDB @ ${dbURL}is connected`)
-});
-
+mongoose.connect(process.env.MONGODB_URI || dbURL)
 
 app.use(morgan('dev'));
 app.use(cookieParser());
@@ -47,4 +45,4 @@ app.use(function (req, res, next){
 var routes = require('./config/routes');
 app.use(routes);
 
-app.listen(3000);
+app.listen(PORT);
