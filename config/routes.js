@@ -11,7 +11,7 @@ var client = yelp.client(process.env.YELP_API_KEY)
 
 var User = require('../models/user')
 var Comments = require('../models/comment')
-var Business = require('../models/business')
+var Business = require('../models/Business')
 
 
 function authenticateUser(req, res, next) {
