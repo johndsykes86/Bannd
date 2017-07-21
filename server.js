@@ -9,17 +9,17 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var MongoDBStore = require('connect-mongodb-session')(session);
-var dbURL = 'mongodb://localhost/Bannd'
+var dbURL = process.env.MONGODB_URI || 'mongodb://localhost/Bannd'
 var port = process.env.PORT || 3000
 
 
 const store = new MongoDBStore({
-  uri: 'mongodb://localhost/Bannd',
+  uri: dbURL,
   collection: 'sessions'
 })
 
 
-mongoose.connect(process.env.MONGODB_URI || dbURL)
+mongoose.connect(dbURL)
 
 app.use(morgan('dev'));
 app.use(cookieParser());
