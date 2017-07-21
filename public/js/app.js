@@ -92,6 +92,10 @@ searchForm.on('submit', (e) => {
   $.ajax(rs).done(cb)
 })
 
+if (document.getElementsByClassName('edit-comment')[0]) {
+  $('.form').hide()
+}
+
 
 $('.edit-comment').on('click', function(){
   var id = $(this).attr('id')
@@ -102,6 +106,7 @@ $('.edit-comment').on('click', function(){
   var body = $('.body')
   var submit = $('.submit')
   var postUrl = form.attr('action')
+  form.show()
 
   title.attr('value', titleText)
   body.text(bodyText)
@@ -110,6 +115,7 @@ $('.edit-comment').on('click', function(){
 })
 
 $('.delete-comment').on("click", function(){
+  $('.form').show()
   businessId = ($('h2').attr('id'))
   commentId= $(this).parent().parent().attr('id')
   $.ajax({url:`/show/${businessId}/comment/${commentId}/x`, method: "post"})

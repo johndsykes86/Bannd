@@ -2,12 +2,10 @@ textarea {
   display: block;
 }
 
-/*img {
-   height: 100px;
-   width: 200px;
-   overflow: hidden;
-}*/
-
 .story-title {
   font-weight:bold;
+}
+
+.delete-form {
+  display: inline;
 }
