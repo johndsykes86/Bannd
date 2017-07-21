@@ -1,20 +1,29 @@
-<h2>Login</h2>
+<div class="form-group col-sm-6 col-md-4 col-md-offset-4">
+  <h3>Log In to Bannd</h3>
+</div>
+<div class="form-group col-sm-6 col-md-4 col-md-offset-4"><h4>
+New to Bannd? <a href="/signup">Sign Up</a></h4>
+</div>
 
 <% if (message.length > 0) { %>
   <div class="alert alert-danger"><%= message %></div>
 <% } %>
 
 <form method="post" action="/login">
-  <div class="form-group">
+
+  <div class="form-group col-sm-6 col-md-4 col-md-offset-4">
     <label for="email">Email</label>
     <input class="form-control" type="text" name="email" id="email">
   </div>
 
 
-  <div class="form-group">
+  <div class="form-group col-sm-6 col-md-4 col-md-offset-4">
     <label for="email">Password</label>
     <input class="form-control" type="password" name="password" id="password">
   </div>
 
+<div class="col-sm-6 col-md-4 col-md-offset-4">
   <input class="btn btn-default" type="submit">
+</div>
+
 </form>

@@ -2,13 +2,16 @@
 <h4>Email: <%= userData.local.email %></h4>
 <h4>Username: <%= userData.userName %></h4></br>
 
-<h3>Your Stories: </h3>
-  <% for(i = 0; i < userData.comments.length; i ++) { %>
-    <div class="panel panel-default col-sm-10 col-md-10">
-      <div class="panel-body">
-      Business: <p><%= userData.comments[i]._business.name %></p>
-      Title: <p><%= userData.comments[i].title %></p>
-      Story: <p><%= userData.comments[i].body %></p>
-      </div>
-    </div>
+<h3>Stories: </h3>
+    <div class="panel col-sm-10 col-md-10">
+          <% for(i = 0; i < userData.comments.length; i ++) { %>
+            <ul class="list-group">
+          <li class="list-group-item">
+            Business: <p><%= userData.comments[i]._business.name %></p>
+            Title: <p><%= userData.comments[i].title %></p>
+           Story: <p><%= userData.comments[i].body %></p>
+           </li>
+        </ul>
+
   <% } %>
+</div>
