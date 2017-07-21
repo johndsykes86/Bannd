@@ -10,11 +10,11 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var MongoDBStore = require('connect-mongodb-session')(session);
 var dbURL = 'mongodb://localhost/bannd'
-var PORT = process.env.PORT || 3000
+var port = process.env.PORT || 3000
 
 
 const store = new MongoDBStore({
-  uri: 'mongodb://localhost/Bannd',
+  uri: 'mongodb://localhost/bannd',
   collection: 'sessions'
 })
 
