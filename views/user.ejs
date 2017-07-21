@@ -8,7 +8,7 @@
           <% for(i = 0; i < userData.comments.length; i ++) { %>
             <ul class="list-group">
           <li class="list-group-item">
-            Business: <p><%= userData.comments[i]._business.name %></p>
+            Business: </br><a href="/show/<%= userData.comments[i]._business.yelpID %>"><%= userData.comments[i]._business.name %></a></br>
             Title: <p><%= userData.comments[i].title %></p>
            Story: <p><%= userData.comments[i].body %></p>
            </li>
