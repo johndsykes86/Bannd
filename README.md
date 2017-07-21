@@ -5,6 +5,7 @@
 
 An app that allows you to post stories to businesses you have been banned from
 
+[Project Link](https://wdi-bannd.herokuapp.com/home)
 ---
 
 ### Approach
@@ -46,7 +47,7 @@ Kyle - Back end and display of front end views
 
 [ERD](https://www.gliffy.com/go/share/s8daits8qx1stp44xn6t)
 
-[Wireframes]()
+[Wireframes](https://wdi-project2.mybalsamiq.com/projects/wdi-project3/grid)
 
 
 ---
