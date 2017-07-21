@@ -19,13 +19,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Bannd</a>
+          <a class="navbar-brand" ><img style="max-width:100px; margin-top: -7px" src="../images/Logomakr_4BaWu7.png" class="img-thumbnail" style=""></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="user-menu">
         <% if (user) { %>
-          <form id="search-form" class="navbar-form navbar-left" >
+          <form id="search-form" class="navbar-form navbar-left " >
             <input type="text" class="form-control" placeholder="Find Business" id="search-text">
             <input type="text" class="form-control" placeholder="Location" id="location-text">
             <button type="submit" id="search-form" class="btn btn-default">Search</button>
@@ -48,8 +48,6 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-
-
 
     <main class="container">
       <%- body %>
