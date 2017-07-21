@@ -6,7 +6,7 @@
     <h2 id="<%= routeId %>"><%= data.name %></h2>
     <h3><%= data.address %></h3>
     <h4><%= `${data.city}, ${data.state} ${data.zip_code}` %></h4>
-    <h4>BAN COUNT: <%= `${data.comments.length}` %></h4>
+    <h4>Bannd Count: <%= `${data.comments.length}` %></h4>
     <% for (var i = 0; i < data.comments.length; i++) { %>
       <div class="col-sm-2 col-md-2">
         <div class="panel panel-default">
