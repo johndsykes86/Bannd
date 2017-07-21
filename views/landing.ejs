@@ -1,6 +1,4 @@
 
-
-
   <!DOCTYPE html>
   <html>
     <head>
@@ -26,7 +24,7 @@
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="user-menu">
-            <ul>
+            <ul class = "nav navbar-nav">
               <% if (user) { %>
                 <li>Hello <a href="<%= `/profile/${user.id}` %>"><%= user.local.email %></a></li>
                 <li><a href="/logout">Logout</a></li>
